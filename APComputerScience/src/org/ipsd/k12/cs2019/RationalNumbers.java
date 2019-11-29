@@ -142,10 +142,10 @@ public class RationalNumbers
 		
 		//r1.add(r);
 	
-		//System.out.println("After addInPlace : " + r1);		
+		System.out.println("After addInPlace : " + r1);		
 		
 		
-		
+	
 		
 		
 	}
