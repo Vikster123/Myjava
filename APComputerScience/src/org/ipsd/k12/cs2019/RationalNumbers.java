@@ -11,6 +11,7 @@ public class RationalNumbers
 		
 		myNumerator = num;
 		myDenominator = denom;
+		//reduce();
 	}
 	
 	//default constructor creates the fraction 1/1
@@ -49,6 +50,31 @@ public class RationalNumbers
 	    return result;
 	}
 	
+	//adds the RationalNumber object with another RationalNumber r
+	//use an example like 2/3 + 3/4 to see how to get common denominators
+	public RationalNumbers add(RationalNumbers r){
+
+		RationalNumbers result = null;
+		
+		int newNumerator = (myNumerator * r.getmyDenominator() ) + (myDenominator * r.getmyNumerator());
+		int newDenominator = myDenominator * r.getmyDenominator();
+		result = new RationalNumbers (newNumerator, newDenominator);
+		result.reduce();
+		return result;
+	}
+	
+	//subtract the RationalNumber object with another RationalNumber r
+	public RationalNumbers subtract(RationalNumbers r){
+
+		RationalNumbers result = null;
+		
+		int newNumerator = (myNumerator * r.getmyDenominator() ) - (myDenominator * r.getmyNumerator());
+		int newDenominator = myDenominator * r.getmyDenominator();
+		result = new RationalNumbers (newNumerator, newDenominator);
+		result.reduce();
+		return result;
+	}
+
 	//returns a NEW rational number that multiplies 
 	//the rational number parameter, r, with the implicit rational number object.
 	public RationalNumbers multiply(RationalNumbers r){
@@ -58,6 +84,7 @@ public class RationalNumbers
 		int newNumerator = myNumerator * r.getmyNumerator();
 		int newDenominator = myDenominator * r.getmyDenominator();
 		result = new RationalNumbers (newNumerator, newDenominator);
+		result.reduce();
 		
 		return result;
 		
@@ -72,34 +99,10 @@ public class RationalNumbers
 		int newNumerator = myNumerator * r.getmyDenominator();
 		int newDenominator = myDenominator * r.getmyNumerator();
 		result = new RationalNumbers (newNumerator, newDenominator);
+		result.reduce();
 		
 		return result;
     
-	}
-	
-	//adds the RationalNumber object with another RationalNumber r
-	//use an example like 2/3 + 3/4 to see how to get common denominators
-	public RationalNumbers add(RationalNumbers r){
-
-		RationalNumbers result = null;
-		
-		int newNumerator = (myNumerator * r.getmyDenominator() ) + (myDenominator * r.getmyNumerator());
-		int newDenominator = myDenominator * r.getmyDenominator();
-		result = new RationalNumbers (newNumerator, newDenominator);
-		
-		return result;
-	}
-	
-	//subtract the RationalNumber object with another RationalNumber r
-	public RationalNumbers subtract(RationalNumbers r){
-
-		RationalNumbers result = null;
-		
-		int newNumerator = (myNumerator * r.getmyDenominator() ) - (myDenominator * r.getmyNumerator());
-		int newDenominator = myDenominator * r.getmyDenominator();
-		result = new RationalNumbers (newNumerator, newDenominator);
-		
-		return result;
 	}
 	
 	//Challenge Method:
@@ -108,45 +111,26 @@ public class RationalNumbers
 	//private so only the rational number class has access
 	//needs to use loops, mod, and if statements
 	private void reduce(){
-				
-	}
+		int n1 = myNumerator;
+		int n2 = myDenominator;
+		if (n1 > 0 && n2 > 0) {
+			while (n1 != 0 && n2 != 0){
+				  if(n1 > n2)
+				     n1 = n1 % n2;
+				  else
+				     n2 = n2 % n1;
+				}
+			
+				if(n1 !=0) {
+					myNumerator = myNumerator/n1;
+					myDenominator = myDenominator/n1;
+				}
+				else {
+					myNumerator = myNumerator/n2;
+					myDenominator = myDenominator/n2;
+				}
+			} //end while
+		} //end if
 	
-	public static void main (String args []) {
-		
-		RationalNumbers r1 = new RationalNumbers (4,5);		
-		RationalNumbers r = new RationalNumbers(6,2);
-		System.out.println("r1 : " + r1);
-		System.out.println ("r : " + r);
-		
-		//
-		//System.out.println(new RationalNumbers(2,3).add(new RationalNumbers(5,7)));
-		//
-		
-		RationalNumbers result = r1.add(r);
-		System.out.println( r1 + " + " + r + " = " + result);
-		
-	    result = r1.subtract(r);
-		System.out.println(r1 + " - " + r + " = " + result);
-		
-	    result = r1.multiply(r);
-		System.out.println( r1 + " * " + r + " = " + result);
-		
-	    result = r1.divide(r);
-		System.out.println(r1 + " / " + r + " = " + result);
-		
-		result = r.add(r1);
-		System.out.println( r1 + " + " + r + " = " + result);
-		
-	    result = r1.getReciprocal();
-		System.out.println( r1 + " --> " + result);
-		
-		//r1.add(r);
 	
-		System.out.println("After addInPlace : " + r1);		
-		
-		
-	
-		
-		
-	}
-}
+} // end class
