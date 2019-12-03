@@ -56,10 +56,10 @@ public String toString() {
 	}
 
 public void salaryIncrement() {
-	 this.salary = (this.salary * 0.1) + this.salary;
+	 this.salary = this.salary * 0.1 + this.salary;
 	}
 
-// Main method
+
 
 
 } // end class
